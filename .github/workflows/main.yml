@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@master
       - run: npm install
       - run: cd ./services/auth
-      - run: ls
+      - run: sls deploy
   # deploy:
   #   runs-on: ubuntu-latest
   #   steps:
