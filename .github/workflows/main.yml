@@ -12,8 +12,8 @@ jobs:
       - run: npm install
   deploy:
     name: serverless deploy
-    run: cd ./services/auth
     steps:
+      - run: cd ./services/auth
       - uses: serverless/github-action@master
         with:
           args: deploy
