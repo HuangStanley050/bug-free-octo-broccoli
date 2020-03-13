@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: npm install
+      - working-directory: ./services/auth/
       - name: serverless deploy
         uses: serverless/github-action@master
         with:
