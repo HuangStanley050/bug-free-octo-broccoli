@@ -12,7 +12,7 @@ jobs:
         run: npm install
       - name: Deploy sls function
         working-directory: ./services/auth
-        uses: serverless/github-action@master
+      - uses: serverless/github-action@master
         with:
           args: deploy
           env:
