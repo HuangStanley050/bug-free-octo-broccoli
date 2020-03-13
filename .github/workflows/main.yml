@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@master
       - run: npm install
   deploy:
+    working-directory: services/auth
     name: serverless deploy
     runs-on: ubuntu-latest
     steps:
-      - run: ls
       - uses: serverless/github-action@master
         with:
           args: deploy
