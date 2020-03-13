@@ -12,7 +12,7 @@ jobs:
   deploy:
     steps:
       - name: serverless deploy
-      - run: cd ./services/auth
+        working-directory: ./services/auth
         uses: serverless/github-action@master
         with:
           args: deploy
