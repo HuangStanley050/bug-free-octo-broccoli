@@ -8,12 +8,11 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/checkout@master
       - run: npm install
       - name: serverless deploy
+      - run: cd ./services/auth
         uses: serverless/github-action@master
-        working-directory: ./services/auth/
         with:
           args: deploy
         env:
