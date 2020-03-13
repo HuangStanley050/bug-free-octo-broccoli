@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@master
       - run: npm install
   deploy:
-    working-directory: services/auth
     name: serverless deploy
+    working-directory: services/auth
     runs-on: ubuntu-latest
     steps:
       - uses: serverless/github-action@master
