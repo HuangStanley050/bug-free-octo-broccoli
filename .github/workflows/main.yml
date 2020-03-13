@@ -5,13 +5,14 @@ on:
 name: Deploy master branch
 jobs:
   build:
-    name: deploy
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - run: npm install
   deploy:
     name: serverless deploy
+    runs-on: ubuntu-latest
     steps:
       - run: cd ./services/auth
       - uses: serverless/github-action@master
