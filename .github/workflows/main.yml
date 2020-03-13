@@ -4,14 +4,13 @@ on:
       - master
 name: Deploy master branch
 jobs:
-  install:
-    name: install npm depends
+  deployAWS:
     runs-on: ubuntu-latest
-    uses: actions/checkout@master
-    run: npm install
-  deploy:
     steps:
-      - name: serverless deploy
+      - uses: actions/checkout@master
+      - name: install NPM packages
+        run: npm install
+      - name: Deploy sls function
         working-directory: ./services/auth
         uses: serverless/github-action@master
         with:
