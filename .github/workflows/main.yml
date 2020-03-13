@@ -14,7 +14,7 @@ jobs:
     name: serverless deploy
     runs-on: ubuntu-latest
     steps:
-      - run: cd ./services/auth
+      - run: ls
       - uses: serverless/github-action@master
         with:
           args: deploy
