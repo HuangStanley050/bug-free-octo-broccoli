@@ -23,10 +23,10 @@ provider:
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
 environment:
-  AWS_ACCESS_KEY_ID: ${evn:AWS_ACC_KEY_ID}
-  AWS_SECRET: ${evn:AWS_SECRET}
-  AWS_USER_POOL_ID: ${evn:AWS_USER_POOL_ID}
-  AWS_CLIENT_ID: ${evn:AWS_CLIENT_ID}
+  AWS_ACCESS_KEY_ID: ${env:AWS_ACC_KEY_ID}
+  AWS_SECRET: ${env:AWS_SECRET}
+  AWS_USER_POOL_ID: ${env:AWS_USER_POOL_ID}
+  AWS_CLIENT_ID: ${env:AWS_CLIENT_ID}
 
 custom:
   serverless-offline:
