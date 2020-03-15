@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: npm install
-      - name: set env
+
       - run: export STUFF=hi
       - run: echo $STUFF
       - name: serverless deploy
