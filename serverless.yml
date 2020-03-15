@@ -34,14 +34,14 @@ custom:
 
 functions:
   login:
-    handler: loginHandler.login
+    handler: ./services/auth/loginHandler.login
     events:
       - http:
           path: login
           method: post
           cors: true
   register:
-    handler: registerHandler.register
+    handler: ./services/auth/registerHandler.register
     events:
       - http:
           path: register
