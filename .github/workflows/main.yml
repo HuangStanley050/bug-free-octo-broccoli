@@ -13,9 +13,9 @@ jobs:
       - uses: actions/npm@master
         with:
           args: install
-      # - working-directory: ./services/auth
       - name: serverless deploy
       - uses: serverless/github-action@master
+        working-directory: ./services/auth
         with:
           args: deploy
   # deploy:
