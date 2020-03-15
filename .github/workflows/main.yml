@@ -10,10 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: npm install
+      - name: set env
+      - run: export STUFF=hi
+      - run: echo $STUFF
       - name: serverless deploy
         uses: serverless/github-action@master
         with:
-          args: AWS_USER_POOL_ID='${{secrets.AWS_USER_POOL_ID}}' AWS_ACC_KEY_ID='${{secrets.AWS_ACC_KEY_ID}}' AWS_SECRET='${{secrets.AWS_SECRET}}' AWS_CLIENT_ID='${{secrets.AWS_CLIENT_ID}}' deploy
+          args: deploy
         env:
           # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           # or if using AWS creds directly
