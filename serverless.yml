@@ -27,12 +27,24 @@ environment:
   AWS_SECRET: ${env:AWS_SECRET}
   AWS_USER_POOL_ID: ${env:AWS_USER_POOL_ID}
   AWS_CLIENT_ID: ${env:AWS_CLIENT_ID}
-
+  TEST: ${env:TEST}
+  HOME: ${env:HOME}
 custom:
   serverless-offline:
     port: 8000
 
 functions:
+  data:
+    handler: ./services/data/dataHandler.data
+    events:
+      - http:
+          path: data
+          method: get
+          cors: true
+          authorizer: authorizerFunc
+  authorizerFunc:
+    handler: ./services/authorizer/checkAuth.auth
+
   login:
     handler: ./services/auth/loginHandler.login
     events:

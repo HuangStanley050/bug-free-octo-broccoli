@@ -21,6 +21,8 @@ const utilPromiseSetPassword = promisify(
 ).bind(COGNITO_CLIENT);
 
 export const register = async (event, context) => {
+  console.log(process.env.TEST);
+  console.log(process.env.HOME);
   const data = JSON.parse(event.body);
   const { email, password } = data;
   const createUserParams = {
