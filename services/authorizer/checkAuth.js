@@ -2,24 +2,22 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import jwkToPem from "jwk-to-pem";
 
-// const generatePolicy = (principalId, effect, resource) => {
-//   const authResponse = {};
-//   authResponse.principalId = principalId;
-//   if (effect && resource) {
-//     const policyDocument = {};
-//     policyDocument.Version = "2012-10-17";
-//     policyDocument.Statement = [];
-//     const statementOne = {};
-//     statementOne.Action = "execute-api:Invoke";
-//     statementOne.Effect = effect;
-//     statementOne.Resource = resource;
-//     policyDocument.Statement[0] = statementOne;
-//     authResponse.policyDocument = policyDocument;
-//   }
-//   return authResponse;
-// };
-
-//const jwtSecret = "verySecretMuchWow";
+const generatePolicy = (principalId, effect, resource) => {
+  const authResponse = {};
+  authResponse.principalId = principalId;
+  if (effect && resource) {
+    const policyDocument = {};
+    policyDocument.Version = "2012-10-17";
+    policyDocument.Statement = [];
+    const statementOne = {};
+    statementOne.Action = "execute-api:Invoke";
+    statementOne.Effect = effect;
+    statementOne.Resource = resource;
+    policyDocument.Statement[0] = statementOne;
+    authResponse.policyDocument = policyDocument;
+  }
+  return authResponse;
+};
 
 export const auth = async (event, context, callback) => {
   const token = event.authorizationToken;
@@ -32,21 +30,14 @@ export const auth = async (event, context, callback) => {
     `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_USER_POOL_ID}/.well-known/jwks.json`
   );
   const pem = jwkToPem(result.data.keys[1]);
-  console.log(result.data);
-  // console.log("+++++++++++++++");
-  console.log(pem);
-  jwt.verify(tokenValue, pem, { algorithms: ["RS256"] }, function(
-    err,
-    decodedToken
-  ) {
-    if (!err) {
-      console.log("token okay");
-      console.log(decodedToken);
-    } else {
-      console.log("token not okay");
-      console.log("here is the token: ", tokenValue);
-      console.log(err);
-      callback("Token not authorized");
-    }
-  });
+  try {
+    const decoded = jwt.verify(tokenValue, pem, { algorithm: ["RS256"] });
+    //console.log(decoded);
+    return callback(
+      null,
+      generatePolicy(decoded.sub, "Allow", event.methodArn)
+    );
+  } catch (err) {
+    return callback(null, "Token not valid");
+  }
 };
