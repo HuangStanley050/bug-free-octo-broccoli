@@ -27,6 +27,8 @@ environment:
   AWS_SECRET: ${env:AWS_SECRET}
   AWS_USER_POOL_ID: ${env:AWS_USER_POOL_ID}
   AWS_CLIENT_ID: ${env:AWS_CLIENT_ID}
+  AWS_REGION: ${env:AWS_REGION}
+  COGNITO_USER_POOL_ID: ${env:COGNITO_USER_POOL_ID}
   TEST: ${env:TEST}
   HOME: ${env:HOME}
 custom:
