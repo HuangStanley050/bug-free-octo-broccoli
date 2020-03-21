@@ -19,7 +19,7 @@ const generatePolicy = (principalId, effect, resource) => {
   return authResponse;
 };
 
-export const auth = async (event, context, callback) => {
+export const auth = async (event, context) => {
   const token = event.authorizationToken;
 
   if (!token) return callback(null, "Unauthorized");
@@ -32,12 +32,9 @@ export const auth = async (event, context, callback) => {
   const pem = jwkToPem(result.data.keys[1]);
   try {
     const decoded = jwt.verify(tokenValue, pem, { algorithm: ["RS256"] });
-    //console.log(decoded);
-    return callback(
-      null,
-      generatePolicy(decoded.sub, "Allow", event.methodArn)
-    );
+
+    return generatePolicy(decoded.sub, "Allow", event.methodArn);
   } catch (err) {
-    return callback(null, "Token not valid");
+    return "token not valid";
   }
 };
