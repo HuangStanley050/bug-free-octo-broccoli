@@ -22,7 +22,7 @@ const generatePolicy = (principalId, effect, resource) => {
 export const auth = async (event, context) => {
   const token = event.authorizationToken;
 
-  if (!token) return callback(null, "Unauthorized");
+  if (!token) return "Not authorized, no token!!";
   const tokenParts = event.authorizationToken.split(" ");
   const tokenValue = tokenParts[1];
 
