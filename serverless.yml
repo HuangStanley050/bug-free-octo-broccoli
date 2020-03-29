@@ -36,6 +36,13 @@ custom:
     port: 8000
 
 functions:
+  logout:
+    handler: ./services/auth/logoutHandler.logout
+    events:
+      - http:
+          path: logout
+          method: post
+          cors: true
   data:
     handler: ./services/data/dataHandler.data
     events:
@@ -44,6 +51,7 @@ functions:
           method: get
           cors: true
           authorizer: authorizerFunc
+
   authorizerFunc:
     handler: ./services/authorizer/checkAuth.auth
 
